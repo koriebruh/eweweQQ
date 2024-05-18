@@ -1,0 +1,120 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "FurniScan API",
+    "description": "API documentation of FurniScan app"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "localhost"
+    }
+  ],
+  "tags": [
+    {
+      "name": "User",
+      "description": "Data about users"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get All Users",
+        "description": "Returns a list of users.",
+        "responses": {
+          "200": {
+            "description": "Success get all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "12345"
+                      },
+                      "username": {
+                        "type": "string",
+                        "example": "user1"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "user1@example.com"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["User"],
+        "summary": "Add Data User",
+        "description": "This API handles signup",
+        "requestBody": {
+          "description": "User object that needs to be added",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "repassword": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username", "email", "password", "repassword"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success add user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "User already exist or Password doesn't match"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  }
+}
