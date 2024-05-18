@@ -1,5 +1,6 @@
 const prisma = require('../db/index');
 
+// query nampilin semua user (select all user)
 const findUsers = async () => {
   const users = await prisma.user.findMany();
 
