@@ -32,3 +32,7 @@ app.use('/users', userRoutes);
 app.listen(PORT, () => {
   console.log(`Server started at http://localhost:${PORT}`);
 });
+
+
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
