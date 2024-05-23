@@ -5,8 +5,6 @@ const SECRET_KEY = 'bingungisiapa';
 
 const { findUsers, findUserByEmail, addUser } = require('../models/userModel');
 
-
-
 const getAllUsers = async (req, res) => {
   try {
     const users = await findUsers();

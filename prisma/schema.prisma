@@ -13,9 +13,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id        Int       @id @default(autoincrement())
-  username  String    @unique 
-  email     String    @unique
-  password  String
+model Users{
+  user_id     Int       @id @default(autoincrement())
+  username    String    @unique 
+  email       String    @unique
+  password    String
+  created_at  DateTime  @default(now())
 }
