@@ -23,16 +23,16 @@ app.get('/', (req, res) => {
 });
 
 // Handle routes users
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/user');
 app.use('/users', userRoutes);
 
 // Handle routes product
-// Nanti disini buat handle product
+const categoryRoutes = require('./routes/category');
+app.use('/category', categoryRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started at http://localhost:${PORT}`);
 });
-
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());

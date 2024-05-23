@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const response = require('../response');
 const SECRET_KEY = 'bingungisiapa';
 
-const { findUsers, findUserByEmail, addUser } = require('../models/userModel');
+const { findUsers, findUserByEmail, addUser } = require('../models/Users');
 
 const getAllUsers = async (req, res) => {
   try {
@@ -52,11 +52,10 @@ const signupUser = async (req, res) => {
   }
 };
 
-
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    
+
     //cek email dan password tersedia atau tidak
     if (!email || !password) {
       return response(400, 'error', 'Email and password are required', res);
@@ -64,29 +63,36 @@ const loginUser = async (req, res) => {
 
     const user = await findUserByEmail(email);
     //cek email dan password sesuai atau tidak
-    if (!user){
-      return response (401, 'error', 'Invalid email or password', res);
+    if (!user) {
+      return response(401, 'error', 'Invalid email or password', res);
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) {
-        response(401, 'error', 'error', 'Invalid email or password', res);
-      }
+    if (!isPasswordValid) {
+      response(401, 'error', 'error', 'Invalid email or password', res);
+    }
 
-      const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
-      res.cookie('token', token, { httpOnly: true, maxAge: 3600000 });
+    const token = jwt.sign({ userId: user.id }, SECRET_KEY, {
+      expiresIn: '1h',
+    });
+    res.cookie('token', token, { httpOnly: true, maxAge: 3600000 });
 
-      //respon saat login berhasil
-      response(200, { token, userId: user.id, username: user.username, email: user.email }, 'Success login', res);
+    //respon saat login berhasil
+    response(
+      200,
+      { token, userId: user.id, username: user.username, email: user.email },
+      'Success login',
+      res
+    );
   } catch (error) {
-      response(500, 'invalid', 'error', res);
-      console.log(error.message);
-    }       
+    response(500, 'invalid', 'error', res);
+    console.log(error.message);
+  }
 };
 
 const logoutUser = (req, res) => {
   try {
-    // asumsi kita menggunakan token invalid 
+    // asumsi kita menggunakan token invalid
     // const token = req.headers.authorization.split(' ')[1];
     // if (!token) {
     //   return response(400, 'error', 'Token is required', res);
@@ -102,5 +108,4 @@ const logoutUser = (req, res) => {
   }
 };
 
-
-module.exports = { getAllUsers, signupUser, loginUser, logoutUser};
+module.exports = { getAllUsers, signupUser, loginUser, logoutUser };

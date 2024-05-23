@@ -2,7 +2,8 @@
   "openapi": "3.0.0",
   "info": {
     "title": "FurniScan API",
-    "description": "API documentation of FurniScan app"
+    "description": "API documentation of FurniScan app",
+    "version": "1.0.0"
   },
   "servers": [
     {
@@ -14,6 +15,10 @@
     {
       "name": "User",
       "description": "Data about users"
+    },
+    {
+      "name": "Category",
+      "description": "Data about categories"
     }
   ],
   "paths": {
@@ -54,7 +59,9 @@
             "description": "Server error"
           }
         }
-      },
+      }
+    },
+    "/users/signup": {
       "post": {
         "tags": ["User"],
         "summary": "Add Data User",
@@ -108,17 +115,21 @@
             }
           },
           "400": {
-            "description": "User already exist or Password doesn't match"
+            "description": "User already exists or Password doesn't match"
           },
           "500": {
             "description": "Server error"
           }
         }
-      },
+      }
+    },
+    "/users/login": {
       "post": {
+        "tags": ["User"],
         "summary": "User login",
-        "description": "Logs user into the system",
+        "description": "This API handles login",
         "requestBody": {
+          "description": "User login credentials",
           "required": true,
           "content": {
             "application/json": {
@@ -126,12 +137,10 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string",
-                    "example": "user@example.com"
+                    "type": "string"
                   },
                   "password": {
-                    "type": "string",
-                    "example": "password123"
+                    "type": "string"
                   }
                 },
                 "required": ["email", "password"]
@@ -141,13 +150,16 @@
         },
         "responses": {
           "200": {
-            "description": "Login successful",
+            "description": "Successful login",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "email": {
                       "type": "string"
                     },
                     "token": {
@@ -159,92 +171,48 @@
             }
           },
           "400": {
-            "description": "Email and password are required",
+            "description": "Invalid credentials"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/category": {
+      "get": {
+        "tags": ["Category"],
+        "summary": "Get All Categories",
+        "description": "Returns a list of categories.",
+        "responses": {
+          "200": {
+            "description": "Success get all categories",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "category_name": {
+                        "type": "string",
+                        "example": "table"
+                      }
                     }
                   }
                 }
               }
             }
           },
-          "401": {
-            "description": "Invalid email or password",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
+          "500": {
+            "description": "Server error"
           }
-        },
-        "post": {
-          "tags": ["User"],
-          "summary": "User logout",
-          "description": "Logs user out of the system",
-          "responses": {
-            "200": {
-              "description": "Logout successful",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string",
-                        "example": "Logout successful"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Token is required",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string",
-                        "example": "Token is required"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Server error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string",
-                        "example": "Internal server error"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+        }
       }
-    }
     }
   }
 }
