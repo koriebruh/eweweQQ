@@ -26,9 +26,13 @@ app.get('/', (req, res) => {
 const userRoutes = require('./routes/user');
 app.use('/users', userRoutes);
 
-// Handle routes product
+// Handle routes category
 const categoryRoutes = require('./routes/category');
 app.use('/category', categoryRoutes);
+
+// Handle routes product
+const productRoutes = require('./routes/product');
+app.use('/product', productRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started at http://localhost:${PORT}`);

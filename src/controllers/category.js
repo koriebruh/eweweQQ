@@ -1,5 +1,5 @@
 const response = require('../response');
-const findCategories = require('../models/Categories');
+const { findCategories, createCategory } = require('../models/Category');
 
 const getAllCategory = async (req, res) => {
   try {
@@ -12,4 +12,21 @@ const getAllCategory = async (req, res) => {
   }
 };
 
-module.exports = getAllCategory;
+const addCategory = async (req, res) => {
+  try {
+    const { category_name } = req.body;
+
+    const newCategory = {
+      category_name,
+    };
+
+    await createCategory(newCategory);
+
+    response(201, newCategory, 'Success add category', res);
+  } catch (error) {
+    console.log(error.message);
+    response(500, 'invalid', 'error when add category', res);
+  }
+};
+
+module.exports = { getAllCategory, addCategory };

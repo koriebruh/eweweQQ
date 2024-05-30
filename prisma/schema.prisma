@@ -21,25 +21,28 @@ model Users{
   created_at  DateTime  @default(now())
 }
 
-model Category {
+model Categories {
   category_id   Int       @id @default(autoincrement())
-  category_name String
-  // products      Product[] @relation("CategoryProducts")
+  category_name String    @unique
+  products      Products[] @relation("CategoryProducts") // declare relasi ke product 
 }
 
-// model Product {
-//   product_id      Int       @id @default(autoincrement())
-//   product_image   String  
-//   description     String  
-//   stock_quantity  String
-//   price           Float
-//   rating          Float
-//   material        String
-//   fabric          String
-//   dimension       String
+model Products {
+  product_id      Int       @id @default(autoincrement())
+  product_name    String    @unique
+  product_image   String  
+  description     String
+  color           String[]  @default([])
+  stock_quantity  Int
+  price           Int
+  rating          Float
+  material        String
+  fabric          String
+  dimension       String
 
-//   category      Category  @relation("CategoryProducts", fields: [category_id], references: [category_id])
-//   category_id   Int
-// }
+  category      Categories  @relation("CategoryProducts", fields: [category_id], references: [category_id]) 
+  category_id   Int
+}
 
+// buat wishlist nanti dia harus relasi ke product dan user
 
