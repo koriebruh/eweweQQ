@@ -9,13 +9,40 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id        Int       @id @default(autoincrement())
-  username  String    @unique 
-  email     String    @unique
-  password  String
+model Users{
+  user_id     Int       @id @default(autoincrement())
+  username    String    @unique 
+  email       String    @unique
+  password    String
+  created_at  DateTime  @default(now())
 }
+
+model Categories {
+  category_id   Int       @id @default(autoincrement())
+  category_name String    @unique
+  products      Products[] @relation("CategoryProducts") // declare relasi ke product 
+}
+
+model Products {
+  product_id      Int       @id @default(autoincrement())
+  product_name    String    @unique
+  product_image   String  
+  description     String
+  color           String[]  @default([])
+  stock_quantity  Int
+  price           Int
+  rating          Float
+  material        String
+  fabric          String
+  dimension       String
+
+  category      Categories  @relation("CategoryProducts", fields: [category_id], references: [category_id]) 
+  category_id   Int
+}
+
+// buat wishlist nanti dia harus relasi ke product dan user
+
