@@ -29,6 +29,10 @@ app.use('/users', userRoutes);
 // Handle routes product
 // Nanti disini buat handle product
 
+//Handle routes wishlist
+const wishlistRoutes = require('./routes/wishlistRoutes');
+app.use('/wishlist', wishlistRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server started at http://localhost:${PORT}`);
 });
@@ -36,3 +40,5 @@ app.listen(PORT, () => {
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+
+
