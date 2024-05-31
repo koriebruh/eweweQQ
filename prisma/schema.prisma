@@ -19,6 +19,7 @@ model Users{
   email       String    @unique
   password    String
   created_at  DateTime  @default(now())
+  wishlists  Wishlist[] @relation("UsersWishlist") // declare relasi ke wishlist
 }
 
 model Categories {
@@ -42,7 +43,16 @@ model Products {
 
   category      Categories  @relation("CategoryProducts", fields: [category_id], references: [category_id]) 
   category_id   Int
+  wishlists  Wishlist[] @relation("ProductsWishlist") // declare relasi ke wishlist
 }
 
 // buat wishlist nanti dia harus relasi ke product dan user
+model Wishlist {
+  wishlist_id Int       @id @default(autoincrement())
+  user        Users     @relation("UsersWishlist", fields: [user_id], references: [user_id])
+  user_id     Int
+  product     Products  @relation("ProductsWishlist", fields: [product_id], references: [product_id])
+  product_id  Int
 
+  @@unique([user_id, product_id])
+}
