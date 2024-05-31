@@ -19,6 +19,10 @@
     {
       "name": "Category",
       "description": "Data about categories"
+    },
+    {
+      "name": "Wishlist",
+      "description": "Operations about wishlist"
     }
   ],
   "paths": {
@@ -326,6 +330,209 @@
           }
         }
       }
+    },
+    "/wishlist": {
+      "get": {
+        "tags": ["Wishlist"],
+        "summary": "Get All Wishlist Items",
+        "description": "Returns a list of wishlist items.",
+        "responses": {
+          "200": {
+            "description": "Success get all wishlist items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "wishlist_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "product_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-05-31T00:00:00.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Wishlist"],
+        "summary": "Add Item to Wishlist",
+        "description": "This API adds an item to the wishlist",
+        "requestBody": {
+          "description": "Wishlist item to add",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer"
+                  },
+                  "product_id": {
+                    "type": "integer"
+                  }
+                },
+                "required": ["user_id", "product_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item added to wishlist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "wishlist_id": {
+                      "type": "integer"
+                    },
+                    "user_id": {
+                      "type": "integer"
+                    },
+                    "product_id": {
+                      "type": "integer"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/{wishlistId}": {
+      "put": {
+        "tags": ["Wishlist"],
+        "summary": "Update Wishlist Item",
+        "description": "This API updates an item in the wishlist",
+        "parameters": [
+          {
+            "name": "wishlistId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Updated wishlist item",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer"
+                  },
+                  "product_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Wishlist item updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "wishlist_id": {
+                      "type": "integer"
+                    },
+                    "user_id": {
+                      "type": "integer"
+                    },
+                    "product_id": {
+                      "type": "integer"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Wishlist item not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Wishlist"],
+        "summary": "Delete Wishlist Item",
+        "description": "Delete a wishlist item by ID.",
+        "parameters": [
+          {
+            "name": "wishlistId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID of the wishlist item to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Wishlist item deleted successfully"
+          },
+          "404": {
+            "description": "Wishlist item not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
     }
+
   }
+  
 }
