@@ -212,6 +212,119 @@
             "description": "Server error"
           }
         }
+      },
+      "post": {
+        "tags": ["Category"],
+        "summary": "Add Categoriy Data",
+        "description": "Create new category data.",
+        "responses": {
+          "200": {
+            "description": "Success add category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "category_name": {
+                        "type": "string",
+                        "example": "table"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/product": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Get all products",
+        "description": "Returns a list of products.",
+        "responses": {
+          "200": {
+            "description": "Success get all products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "category_name": {
+                        "type": "string",
+                        "example": "table"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Product"],
+        "summary": "Add Product Data",
+        "description": "Create new product data.",
+        "responses": {
+          "200": {
+            "description": "Success add product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "product_name": {
+                        "type": "string",
+                        "example": "sofa 3 seater"
+                      },
+                      "product_image": {
+                        "type": "string",
+                        "example": "http://sajdsjfgjsad"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "sofa 3 seater yang empuk parah"
+                      },
+                      "color": {
+                        "type": "array",
+                        "example": ["red", "blue"]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
       }
     }
   }
