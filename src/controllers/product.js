@@ -1,5 +1,9 @@
 const response = require('../response');
-const { findAllProduct, createProduct } = require('../models/Product');
+const {
+  findAllProduct,
+  createProduct,
+  findProductById,
+} = require('../models/Product');
 const { createCategory, findCategoriesByName } = require('../models/Category');
 
 const getAllProducts = async (req, res) => {
@@ -64,4 +68,20 @@ const addProduct = async (req, res) => {
   }
 };
 
-module.exports = { getAllProducts, addProduct };
+const getDetailProduct = async (req, res) => {
+  try {
+    const productId = parseInt(req.params.productId);
+    const product = await findProductById(productId);
+
+    if (!product) {
+      response(404, `Can't find product`, `Product doesn't exist`, res);
+    }
+
+    response(200, product, 'Success get product by Id', res);
+  } catch (error) {
+    response(500, 'Invalid', 'Error when get detail product', res);
+    console.log(error);
+  }
+};
+
+module.exports = { getAllProducts, addProduct, getDetailProduct };

@@ -12,4 +12,12 @@ const createProduct = async (productData) => {
   return product;
 };
 
-module.exports = { findAllProduct, createProduct };
+const findProductById = async (productId) => {
+  const product = await prisma.products.findUnique({
+    where: { product_id: productId },
+  });
+
+  return product;
+};
+
+module.exports = { findAllProduct, createProduct, findProductById };

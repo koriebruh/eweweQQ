@@ -587,18 +587,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "integer",
-                        "example": 201
-                      },
-                      "data": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
                         "type": "object",
                         "properties": {
-                          "id": {
+                          "product_id": {
                             "type": "integer",
                             "example": 1
                           },
@@ -649,17 +649,13 @@
                           "category_id": {
                             "type": "integer",
                             "example": 1
-                          },
-                          "wishlist_id": {
-                            "type": "integer",
-                            "example": 1
                           }
                         }
-                      },
-                      "message": {
-                        "type": "string",
-                        "example": "Success get all products"
                       }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success get all products"
                     }
                   }
                 }
@@ -739,9 +735,6 @@
                   },
                   "category_id": {
                     "type": "integer"
-                  },
-                  "wishlist_id": {
-                    "type": "integer"
                   }
                 }
               }
@@ -763,63 +756,62 @@
                         "example": 201
                       },
                       "data": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "integer",
-                            "example": 1
-                          },
-                          "product_name": {
-                            "type": "string",
-                            "example": "sofa 3 seater"
-                          },
-                          "product_image": {
-                            "type": "string",
-                            "example": "http://sajdsjfgjsad"
-                          },
-                          "description": {
-                            "type": "string",
-                            "example": "sofa 3 seater yang empuk parah"
-                          },
-                          "color": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "product_id": {
+                              "type": "integer",
+                              "example": 1
                             },
-                            "example": ["Red", "Blue"]
-                          },
-                          "stock_quantity": {
-                            "type": "integer",
-                            "example": 10
-                          },
-                          "price": {
-                            "type": "integer",
-                            "example": 1200000
-                          },
-                          "rating": {
-                            "type": "number",
-                            "format": "float",
-                            "example": 4.7
-                          },
-                          "material": {
-                            "type": "string",
-                            "example": "Kulit terbaik pokonya"
-                          },
-                          "fabric": {
-                            "type": "string",
-                            "example": "-"
-                          },
-                          "dimension": {
-                            "type": "string",
-                            "example": "2M x 3M"
-                          },
-                          "category_id": {
-                            "type": "integer",
-                            "example": 1
-                          },
-                          "wishlist_id": {
-                            "type": "integer",
-                            "example": 1
+                            "product_name": {
+                              "type": "string",
+                              "example": "sofa 3 seater"
+                            },
+                            "product_image": {
+                              "type": "string",
+                              "example": "http://sajdsjfgjsad"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "sofa 3 seater yang empuk parah"
+                            },
+                            "color": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "example": ["Red", "Blue"]
+                            },
+                            "stock_quantity": {
+                              "type": "integer",
+                              "example": 10
+                            },
+                            "price": {
+                              "type": "integer",
+                              "example": 1200000
+                            },
+                            "rating": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 4.7
+                            },
+                            "material": {
+                              "type": "string",
+                              "example": "Kulit terbaik pokonya"
+                            },
+                            "fabric": {
+                              "type": "string",
+                              "example": "-"
+                            },
+                            "dimension": {
+                              "type": "string",
+                              "example": "2M x 3M"
+                            },
+                            "category_id": {
+                              "type": "integer",
+                              "example": 1
+                            }
                           }
                         }
                       },
@@ -851,6 +843,152 @@
                     "message": {
                       "type": "string",
                       "example": "Internal Server Error when add product"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/product/{productId}": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Get detail product",
+        "description": "Returns the details of a product by its ID.",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The ID of the product to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success get detail product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "product_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "product_name": {
+                          "type": "string",
+                          "example": "sofa 3 seater"
+                        },
+                        "product_image": {
+                          "type": "string",
+                          "example": "http://sajdsjfgjsad"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "sofa 3 seater yang empuk parah"
+                        },
+                        "color": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": ["Red", "Blue"]
+                        },
+                        "stock_quantity": {
+                          "type": "integer",
+                          "example": 10
+                        },
+                        "price": {
+                          "type": "integer",
+                          "example": 1200000
+                        },
+                        "rating": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 4.7
+                        },
+                        "material": {
+                          "type": "string",
+                          "example": "Kulit terbaik pokonya"
+                        },
+                        "fabric": {
+                          "type": "string",
+                          "example": "-"
+                        },
+                        "dimension": {
+                          "type": "string",
+                          "example": "2M x 3M"
+                        },
+                        "category_id": {
+                          "type": "integer",
+                          "example": 1
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success get product by Id"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "Can't find product"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Product doesn't exist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "Invalid"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error when get detail product"
                     }
                   }
                 }

@@ -1,5 +1,10 @@
 const response = require('../response');
-const { findWishlist, createWishlist, updateWishlist, deleteWishlist } = require('../models/Wishlist');
+const {
+  findWishlist,
+  createWishlist,
+  updateWishlist,
+  deleteWishlist,
+} = require('../models/Wishlist');
 
 const getAllWishlist = async (req, res) => {
   try {
@@ -10,7 +15,6 @@ const getAllWishlist = async (req, res) => {
     response(500, 'invalid', 'error when get all wishlist items', res);
   }
 };
-
 
 const addWishlist = async (req, res) => {
   try {
@@ -28,7 +32,6 @@ const addWishlist = async (req, res) => {
     response(500, 'invalid', 'error when add wishlist item', res);
   }
 };
-
 
 const updatedWishlistItem = async (req, res) => {
   try {
@@ -56,7 +59,6 @@ const deletedWishlistItem = async (req, res) => {
     response(500, 'invalid', 'error when delete wishlist item', res);
   }
 };
-
 
 module.exports = {
   getAllWishlist,
