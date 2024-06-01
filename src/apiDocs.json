@@ -103,6 +103,94 @@
         }
       }
     },
+    "/users/{userId}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get detail User",
+        "description": "Returns a list of user.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The ID of the user to retrieve"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success get detail user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": "1"
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "bagasdrible"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "bagasdrible@gmail.com"
+                          },
+                          "created_at": {
+                            "type": "date-time",
+                            "example": "2024-05-31T14:53:37.586Z"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success get detail user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "null",
+                      "example": null
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error when get detail user"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/signup": {
       "post": {
         "tags": ["User"],

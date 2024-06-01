@@ -1,7 +1,12 @@
 const bcrypt = require('bcryptjs');
 const response = require('../response');
 
-const { findUsers, findUserByEmail, addUser } = require('../models/Users');
+const {
+  findUsers,
+  findUserByEmail,
+  addUser,
+  findUserById,
+} = require('../models/Users');
 const generateTokenAndCookie = require('../utils/generateTokenAndCookie');
 
 const getAllUsers = async (req, res) => {
@@ -108,4 +113,32 @@ const logoutUser = (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, signupUser, loginUser, logoutUser };
+const getDetailUser = async (req, res) => {
+  try {
+    const userId = parseInt(req.params.userId);
+    console.log(userId);
+
+    if (!userId) {
+      return response(400, 'error', 'User ID is required', res);
+    }
+
+    const user = await findUserById(userId);
+
+    if (!user) {
+      return response(404, 'error', 'User not found', res);
+    }
+
+    return response(200, user, 'Success get user detail', res);
+  } catch (error) {
+    response(500, 'invalid', 'Error getting user detail', res);
+    console.log(error.message);
+  }
+};
+
+module.exports = {
+  getAllUsers,
+  signupUser,
+  loginUser,
+  logoutUser,
+  getDetailUser,
+};
