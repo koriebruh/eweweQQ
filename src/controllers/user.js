@@ -22,13 +22,14 @@ const signupUser = async (req, res) => {
 
     // cek apakah user udah ada di database
     const user = await findUserByEmail(email);
+
     if (user) {
-      response(400, 'error', 'User already exist');
+      return response(400, 'error', 'User already exist', res);
     }
 
     // cek password dan repassword sama atau ngga
     if (password !== repassword) {
-      response(400, 'error', `Password doesn't match`);
+      return response(400, 'error', `Password doesn't match`, res);
     }
 
     // encrypt password jika semua proses cek berhasil
@@ -55,22 +56,34 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    //cek email dan password tersedia atau tidak
+    // Check if email and password are provided
     if (!email || !password) {
-      return response(404, 'error', 'Email and password are required', res);
+      return response(400, 'error', 'Email and password are required', res);
     }
 
-    //cek email dan password sesuai atau tidak
+    // Find user by email
     const user = await findUserByEmail(email);
+
+    // Check if user exists
+    if (!user) {
+      return response(
+        404,
+        'user not found',
+        'User does not exist, please sign up',
+        res
+      );
+    }
+
+    // Check if password is valid
     const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!user || !isPasswordValid) {
+    if (!isPasswordValid) {
       return response(401, 'error', 'Invalid email or password', res);
     }
 
-    // create token for user
+    // Create token for user
     let token = generateTokenAndCookie(user.id, res);
 
-    //respon saat login berhasil
+    // Response when login is successful
     const userData = {
       token,
       userId: user.id,
@@ -78,10 +91,10 @@ const loginUser = async (req, res) => {
       email: user.email,
     };
 
-    response(200, userData, 'User success login', res);
+    return response(200, userData, 'User successfully logged in', res);
   } catch (error) {
     console.log(error.message);
-    response(500, 'invalid', 'error when login user', res);
+    return response(500, 'invalid', 'Error when logging in user', res);
   }
 };
 

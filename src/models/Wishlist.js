@@ -1,17 +1,11 @@
 const prisma = require('../db');
 
-
 const findWishlist = async () => {
   const wishlist = await prisma.Wishlist.findMany();
 
   return wishlist;
 };
 
-// const createWishlist = async (wishlistData) => {
-//   const wishlist = await prisma.Wishlist.create({ data: wishlistData });
-
-//   return wishlist;
-// };
 const createWishlist = async (wishlistData) => {
   const { user_id, product_id } = wishlistData;
 
@@ -29,30 +23,25 @@ const createWishlist = async (wishlistData) => {
   return wishlist;
 };
 
-
-
 const updateWishlist = async (wishlistId, updateData) => {
-  
-    const wishlist = await prisma.Wishlist.update({
-      where: { wishlist_id: wishlistId },
-      data: updateData,
-      include: {
-        product: true,
-        user: true,
-      },
-    });
-    return wishlist;
+  const wishlist = await prisma.Wishlist.update({
+    where: { wishlist_id: wishlistId },
+    data: updateData,
+    include: {
+      product: true,
+      user: true,
+    },
+  });
+  return wishlist;
 };
 
 const deleteWishlist = async (wishlistId) => {
-    const wishlist = await prisma.Wishlist.delete({
-      where: { wishlist_id: wishlistId },
-    });
+  const wishlist = await prisma.Wishlist.delete({
+    where: { wishlist_id: wishlistId },
+  });
 
-    return wishlist;
-  
+  return wishlist;
 };
-
 
 module.exports = {
   findWishlist,
