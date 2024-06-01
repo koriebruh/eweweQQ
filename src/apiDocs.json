@@ -37,22 +37,39 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "example": "12345"
-                      },
-                      "username": {
-                        "type": "string",
-                        "example": "user1"
-                      },
-                      "email": {
-                        "type": "string",
-                        "example": "user1@example.com"
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": "1"
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "bagasdrible"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "bagasdrible@gmail.com"
+                          },
+                          "created_at": {
+                            "type": "date-time",
+                            "example": "2024-05-31T14:53:37.586Z"
+                          }
+                        }
                       }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success get all users"
                     }
                   }
                 }
@@ -60,7 +77,28 @@
             }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "null",
+                      "example": null
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Server error"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -104,14 +142,26 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "username": {
-                      "type": "string"
+                    "status": {
+                      "type": "integer",
+                      "example": 201
                     },
-                    "email": {
-                      "type": "string"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "username": {
+                          "type": "string",
+                          "example": "bagasdrible"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "bagasdrible@gmail.com"
+                        }
+                      }
                     },
-                    "password": {
-                      "type": "string"
+                    "message": {
+                      "type": "string",
+                      "example": "Success add user"
                     }
                   }
                 }
@@ -119,10 +169,52 @@
             }
           },
           "400": {
-            "description": "User already exists or Password doesn't match"
+            "description": "User already exists or Password doesn't match",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User already exist or Password doesn't match"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "null",
+                      "example": null
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Server error"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -160,14 +252,30 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "username": {
-                      "type": "string"
+                    "status": {
+                      "type": "integer",
+                      "example": 200
                     },
-                    "email": {
-                      "type": "string"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "username": {
+                          "type": "string",
+                          "example": "bagasdrible"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "bagasdrible@gmail.com"
+                        },
+                        "token": {
+                          "type": "string",
+                          "example": "jwt.token.here"
+                        }
+                      }
                     },
-                    "token": {
-                      "type": "string"
+                    "message": {
+                      "type": "string",
+                      "example": "User success login"
                     }
                   }
                 }
@@ -175,14 +283,163 @@
             }
           },
           "400": {
-            "description": "Invalid credentials"
+            "description": "Invalid data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Email and Password are required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Can't find user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "Can't find user"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User doesn't exist, please sign up"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 401
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid email or password"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "null",
+                      "example": null
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Server error"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
+
+    "/users/logout": {
+      "post": {
+        "tags": ["User"],
+        "summary": "User logout",
+        "description": "This API handles logout",
+        "responses": {
+          "200": {
+            "description": "Successful logout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Logout successful"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal Server Error when logout"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
     "/category": {
       "get": {
         "tags": ["Category"],
@@ -194,18 +451,28 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "category_name": {
-                        "type": "string",
-                        "example": "table"
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "category_name": {
+                          "type": "string",
+                          "example": "table"
+                        }
                       }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success get all categories"
                     }
                   }
                 }
@@ -213,32 +480,68 @@
             }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "invalid"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
       "post": {
         "tags": ["Category"],
-        "summary": "Add Categoriy Data",
+        "summary": "Add Category Data",
         "description": "Create new category data.",
+        "requestBody": {
+          "description": "Category object that needs to be added",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category_name": {
+                    "type": "string",
+                    "example": "table"
+                  }
+                },
+                "required": ["category_name"]
+              }
+            }
+          }
+        },
         "responses": {
-          "200": {
+          "201": {
             "description": "Success add category",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "category_name": {
-                        "type": "string",
-                        "example": "table"
-                      }
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "category_name": {
+                      "type": "string",
+                      "example": "table"
                     }
                   }
                 }
@@ -246,18 +549,40 @@
             }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "invalid"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "error when add category"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
+
     "/product": {
       "get": {
         "tags": ["Product"],
         "summary": "Get all products",
         "description": "Returns a list of products.",
         "responses": {
-          "200": {
+          "201": {
             "description": "Success get all products",
             "content": {
               "application/json": {
@@ -266,13 +591,74 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": {
+                      "status": {
                         "type": "integer",
-                        "example": 1
+                        "example": 201
                       },
-                      "category_name": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "product_name": {
+                            "type": "string",
+                            "example": "sofa 3 seater"
+                          },
+                          "product_image": {
+                            "type": "string",
+                            "example": "http://sajdsjfgjsad"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "sofa 3 seater yang empuk parah"
+                          },
+                          "color": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": ["Red", "Blue"]
+                          },
+                          "stock_quantity": {
+                            "type": "integer",
+                            "example": 10
+                          },
+                          "price": {
+                            "type": "integer",
+                            "example": 1200000
+                          },
+                          "rating": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 4.7
+                          },
+                          "material": {
+                            "type": "string",
+                            "example": "Kulit terbaik pokonya"
+                          },
+                          "fabric": {
+                            "type": "string",
+                            "example": "-"
+                          },
+                          "dimension": {
+                            "type": "string",
+                            "example": "2M x 3M"
+                          },
+                          "category_id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "wishlist_id": {
+                            "type": "integer",
+                            "example": 1
+                          }
+                        }
+                      },
+                      "message": {
                         "type": "string",
-                        "example": "table"
+                        "example": "Success get all products"
                       }
                     }
                   }
@@ -281,7 +667,28 @@
             }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal Server Error when get all product"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -289,9 +696,61 @@
         "tags": ["Product"],
         "summary": "Add Product Data",
         "description": "Create new product data.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_name": {
+                    "type": "string"
+                  },
+                  "product_image": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "color": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "stock_quantity": {
+                    "type": "integer"
+                  },
+                  "price": {
+                    "type": "integer"
+                  },
+                  "rating": {
+                    "type": "number",
+                    "format": "float"
+                  },
+                  "material": {
+                    "type": "string"
+                  },
+                  "fabric": {
+                    "type": "string"
+                  },
+                  "dimension": {
+                    "type": "string"
+                  },
+                  "category_id": {
+                    "type": "integer"
+                  },
+                  "wishlist_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
-          "200": {
-            "description": "Success add product",
+          "201": {
+            "description": "Success add products",
             "content": {
               "application/json": {
                 "schema": {
@@ -299,25 +758,74 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "product_id": {
+                      "status": {
                         "type": "integer",
-                        "example": 1
+                        "example": 201
                       },
-                      "product_name": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "product_name": {
+                            "type": "string",
+                            "example": "sofa 3 seater"
+                          },
+                          "product_image": {
+                            "type": "string",
+                            "example": "http://sajdsjfgjsad"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "sofa 3 seater yang empuk parah"
+                          },
+                          "color": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": ["Red", "Blue"]
+                          },
+                          "stock_quantity": {
+                            "type": "integer",
+                            "example": 10
+                          },
+                          "price": {
+                            "type": "integer",
+                            "example": 1200000
+                          },
+                          "rating": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 4.7
+                          },
+                          "material": {
+                            "type": "string",
+                            "example": "Kulit terbaik pokonya"
+                          },
+                          "fabric": {
+                            "type": "string",
+                            "example": "-"
+                          },
+                          "dimension": {
+                            "type": "string",
+                            "example": "2M x 3M"
+                          },
+                          "category_id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "wishlist_id": {
+                            "type": "integer",
+                            "example": 1
+                          }
+                        }
+                      },
+                      "message": {
                         "type": "string",
-                        "example": "sofa 3 seater"
-                      },
-                      "product_image": {
-                        "type": "string",
-                        "example": "http://sajdsjfgjsad"
-                      },
-                      "description": {
-                        "type": "string",
-                        "example": "sofa 3 seater yang empuk parah"
-                      },
-                      "color": {
-                        "type": "array",
-                        "example": ["red", "blue"]
+                        "example": "Success add product"
                       }
                     }
                   }
@@ -326,11 +834,33 @@
             }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal Server Error when add product"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
+
     "/wishlist": {
       "get": {
         "tags": ["Wishlist"],
@@ -357,11 +887,6 @@
                       "product_id": {
                         "type": "integer",
                         "example": 1
-                      },
-                      "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2024-05-31T00:00:00.000Z"
                       }
                     }
                   }
@@ -370,7 +895,28 @@
             }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "invalid"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "error when get all wishlist items"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -414,10 +960,6 @@
                     },
                     "product_id": {
                       "type": "integer"
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time"
                     }
                   }
                 }
@@ -425,15 +967,57 @@
             }
           },
           "400": {
-            "description": "Invalid input"
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid input"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "invalid"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "error when add wishlist item"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
-    "/{wishlistId}": {
+    "/wishlist/{wishlistId}": {
       "put": {
         "tags": ["Wishlist"],
         "summary": "Update Wishlist Item",
@@ -462,7 +1046,8 @@
                   "product_id": {
                     "type": "integer"
                   }
-                }
+                },
+                "required": ["user_id", "product_id"]
               }
             }
           }
@@ -483,10 +1068,6 @@
                     },
                     "product_id": {
                       "type": "integer"
-                    },
-                    "created_at": {
-                      "type": "string",
-                      "format": "date-time"
                     }
                   }
                 }
@@ -494,13 +1075,76 @@
             }
           },
           "400": {
-            "description": "Invalid input"
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid input"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Wishlist item not found"
+            "description": "Wishlist item not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Wishlist item not found"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "invalid"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "error when update wishlist item"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -521,18 +1165,79 @@
         ],
         "responses": {
           "200": {
-            "description": "Wishlist item deleted successfully"
+            "description": "Wishlist item deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Wishlist item deleted successfully"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Wishlist item not found"
+            "description": "Wishlist item not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Wishlist item not found"
+                    }
+                  }
+                }
+              }
+            }
           },
           "500": {
-            "description": "Server error"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "invalid"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "error when delete wishlist item"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
-
   }
-  
 }
