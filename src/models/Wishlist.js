@@ -23,6 +23,15 @@ const createWishlist = async (wishlistData) => {
   return wishlist;
 };
 
+
+const findWishlistById = async (wishlistId) => {
+  const wishlist = await prisma.Wishlist.findUnique({
+    where: { wishlist_id: wishlistId },
+  });
+
+  return wishlist;
+};
+
 const updateWishlist = async (wishlistId, updateData) => {
   const wishlist = await prisma.Wishlist.update({
     where: { wishlist_id: wishlistId },
@@ -48,4 +57,5 @@ module.exports = {
   createWishlist,
   updateWishlist,
   deleteWishlist,
+  findWishlistById,
 };
