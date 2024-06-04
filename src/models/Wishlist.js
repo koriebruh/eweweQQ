@@ -1,4 +1,4 @@
-const prisma = require('../db');
+const prisma = require('../db/index');
 
 const findWishlist = async () => {
   const wishlist = await prisma.Wishlist.findMany();
@@ -23,13 +23,12 @@ const createWishlist = async (wishlistData) => {
   return wishlist;
 };
 
-
-const findWishlistById = async (wishlistId) => {
-  const wishlist = await prisma.Wishlist.findUnique({
-    where: { wishlist_id: wishlistId },
+const findUserWishlist = async (userId) => {
+  const userWishlist = await prisma.Wishlist.findMany({
+    where: { user_id: userId },
   });
 
-  return wishlist;
+  return userWishlist;
 };
 
 const updateWishlist = async (wishlistId, updateData) => {
@@ -57,5 +56,5 @@ module.exports = {
   createWishlist,
   updateWishlist,
   deleteWishlist,
-  findWishlistById,
+  findUserWishlist,
 };
