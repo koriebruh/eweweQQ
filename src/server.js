@@ -16,6 +16,7 @@ const PORT = process.env.PORT; // ambil value port dari .env
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // test server
 app.get('/', (req, res) => {
@@ -38,12 +39,9 @@ app.use('/product', productRoutes);
 const wishlistRoutes = require('./routes/wishlist');
 app.use('/wishlist', wishlistRoutes);
 
-
 app.listen(PORT, () => {
   console.log(`Server started at http://localhost:${PORT}`);
 });
 
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
-
-

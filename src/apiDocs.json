@@ -9,6 +9,10 @@
     {
       "url": "http://localhost:5000",
       "description": "localhost"
+    },
+    {
+      "url": "https://furniscan-api-biefnc5uba-et.a.run.app/",
+      "description": "Deploy Cloud"
     }
   ],
   "tags": [
@@ -1243,105 +1247,44 @@
         }
       }
     },
-    "/wishlist/{wishlistId}": {
-      "put": {
+    "/wishlist/{userId}": {
+      "get": {
         "tags": ["Wishlist"],
-        "summary": "Update Wishlist Item",
-        "description": "This API updates an item in the wishlist",
+        "summary": "Get All User Wishlist Items",
+        "description": "Returns a list of user wishlist items.",
         "parameters": [
           {
-            "name": "wishlistId",
+            "name": "userId",
             "in": "path",
             "required": true,
             "schema": {
               "type": "integer"
-            }
+            },
+            "description": "The ID of the user to retrieve"
           }
         ],
-        "requestBody": {
-          "description": "Updated wishlist item",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user_id": {
-                    "type": "integer"
-                  },
-                  "product_id": {
-                    "type": "integer"
-                  }
-                },
-                "required": ["user_id", "product_id"]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "Wishlist item updated",
+            "description": "Success get all user wishlist items",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "wishlist_id": {
-                      "type": "integer"
-                    },
-                    "user_id": {
-                      "type": "integer"
-                    },
-                    "product_id": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid input",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 400
-                    },
-                    "data": {
-                      "type": "string",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Invalid input"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Wishlist item not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 404
-                    },
-                    "data": {
-                      "type": "string",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Wishlist item not found"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "wishlist_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "user_id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "product_id": {
+                        "type": "integer",
+                        "example": 1
+                      }
                     }
                   }
                 }
@@ -1365,7 +1308,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "error when update wishlist item"
+                      "example": "error when get all wishlist items"
                     }
                   }
                 }
@@ -1373,7 +1316,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/wishlist/{wishlistId}": {
       "delete": {
         "tags": ["Wishlist"],
         "summary": "Delete Wishlist Item",
@@ -1540,7 +1485,6 @@
           }
         }
       }
-      
     }
   }
 }

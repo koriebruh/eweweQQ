@@ -1,7 +1,7 @@
 const response = require('../response');
 const {
   findWishlist,
-  findWishlistById,
+  findUserWishlist,
   createWishlist,
   updateWishlist,
   deleteWishlist,
@@ -17,13 +17,17 @@ const getAllWishlist = async (req, res) => {
   }
 };
 
-const getDetailWishlist = async (req, res) => {
+const getAllUserWishlist = async (req, res) => {
   try {
-    const wishlistId = parseInt(req.params.wishlistId);
-    const wishlistItem = await findWishlistById(wishlistId);
+    const userId = parseInt(req.params.userId);
+    const wishlistItem = await findUserWishlist(userId);
+
+    if (isNaN(userId)) {
+      return response(400, null, 'Invalid user ID', res);
+    }
 
     if (!wishlistItem) {
-      return response(404, `Can't find wishlist item`, `Wishlist item doesn't exist`, res);
+      return response(404, null, `User doesn't have wishlist item`, res);
     }
 
     response(200, wishlistItem, 'Success get wishlist item by Id', res);
@@ -32,7 +36,6 @@ const getDetailWishlist = async (req, res) => {
     response(500, 'invalid', 'error when get detail wishlist item', res);
   }
 };
-
 
 const addWishlist = async (req, res) => {
   try {
@@ -51,19 +54,19 @@ const addWishlist = async (req, res) => {
   }
 };
 
-const updatedWishlistItem = async (req, res) => {
-  try {
-    const wishlistId = parseInt(req.params.wishlistId);
-    const updateData = req.body;
+// const updatedWishlistItem = async (req, res) => {
+//   try {
+//     const wishlistId = parseInt(req.params.wishlistId);
+//     const updateData = req.body;
 
-    const updatedWishlistItem = await updateWishlist(wishlistId, updateData);
+//     const updatedWishlistItem = await updateWishlist(wishlistId, updateData);
 
-    response(200, updatedWishlistItem, 'Success update wishlist item', res);
-  } catch (error) {
-    console.log(error);
-    response(500, 'invalid', 'error when update wishlist item', res);
-  }
-};
+//     response(200, updatedWishlistItem, 'Success update wishlist item', res);
+//   } catch (error) {
+//     console.log(error);
+//     response(500, 'invalid', 'error when update wishlist item', res);
+//   }
+// };
 
 const deletedWishlistItem = async (req, res) => {
   try {
@@ -80,9 +83,8 @@ const deletedWishlistItem = async (req, res) => {
 
 module.exports = {
   getAllWishlist,
-  getDetailWishlist,
+  getAllUserWishlist,
   addWishlist,
-  updatedWishlistItem,
+  // updatedWishlistItem,
   deletedWishlistItem,
-  
 };
