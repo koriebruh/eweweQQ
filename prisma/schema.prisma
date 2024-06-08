@@ -56,3 +56,11 @@ model Wishlist {
 
   @@unique([user_id, product_id])
 }
+
+
+// prediksi
+model Prediction {
+  id   String @id @default(uuid())
+  data Json
+}
+
