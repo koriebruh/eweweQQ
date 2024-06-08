@@ -58,9 +58,9 @@ model Wishlist {
 }
 
 
-// prediksi
-model Prediction {
-  id   String @id @default(uuid())
-  data Json
-}
+// // prediksi
+// model Prediction {
+//   id   String @id @default(uuid())
+//   data Json
+// }
 

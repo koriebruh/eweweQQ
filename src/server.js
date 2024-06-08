@@ -39,6 +39,10 @@ app.use('/product', productRoutes);
 const wishlistRoutes = require('./routes/wishlist');
 app.use('/wishlist', wishlistRoutes);
 
+// Handle route predict
+const predictRoutes = require('./routes/predict');
+app.use('/predict', predictRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server started at http://localhost:${PORT}`);
 });
