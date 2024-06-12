@@ -20,4 +20,26 @@ const findProductById = async (productId) => {
   return product;
 };
 
-module.exports = { findAllProduct, createProduct, findProductById };
+const findProductByLabel = async (productLabel) => {
+  const product = await prisma.products.findUnique({
+    where: { product_label: productLabel },
+  });
+
+  return product;
+};
+
+const deleteProductById = async (productId) => {
+  const deletedProduct = await prisma.products.delete({
+    where: { product_id: productId },
+  });
+
+  return deletedProduct;
+};
+
+module.exports = {
+  findAllProduct,
+  createProduct,
+  findProductById,
+  findProductByLabel,
+  deleteProductById,
+};

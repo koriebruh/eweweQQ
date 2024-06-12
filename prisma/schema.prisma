@@ -31,7 +31,8 @@ model Categories {
 model Products {
   product_id      Int       @id @default(autoincrement())
   product_name    String    @unique
-  product_image   String  
+  product_label   String    
+  product_image   String[]  
   description     String
   color           String[]  @default([])
   stock_quantity  Int
@@ -51,16 +52,8 @@ model Wishlist {
   wishlist_id Int       @id @default(autoincrement())
   user        Users     @relation("UsersWishlist", fields: [user_id], references: [user_id])
   user_id     Int
-  product     Products  @relation("ProductsWishlist", fields: [product_id], references: [product_id])
+  product     Products  @relation("ProductsWishlist", fields: [product_id], references: [product_id],onDelete: Cascade,onUpdate: Cascade)
   product_id  Int
 
   @@unique([user_id, product_id])
 }
-
-
-// // prediksi
-// model Prediction {
-//   id   String @id @default(uuid())
-//   data Json
-// }
-

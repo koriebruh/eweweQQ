@@ -7,7 +7,7 @@ const findCategories = async () => {
 };
 
 const findCategoriesByName = async (categoryName) => {
-  const category = await prisma.Categories.findUnique({
+  const category = await prisma.categories.findUnique({
     where: { category_name: categoryName },
   });
 

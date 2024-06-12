@@ -3,6 +3,7 @@ const {
   findAllProduct,
   createProduct,
   findProductById,
+  deleteProductById,
 } = require('../models/Product');
 const { createCategory, findCategoriesByName } = require('../models/Category');
 
@@ -24,6 +25,7 @@ const addProduct = async (req, res) => {
     const {
       productCategory,
       productName,
+      productLabel,
       productImage,
       description,
       color,
@@ -47,6 +49,7 @@ const addProduct = async (req, res) => {
     const productData = {
       category_id: category.category_id,
       product_name: productName,
+      product_label: productLabel,
       product_image: productImage,
       description,
       color,
@@ -84,4 +87,25 @@ const getDetailProduct = async (req, res) => {
   }
 };
 
-module.exports = { getAllProducts, addProduct, getDetailProduct };
+const deleteProduct = async (req, res) => {
+  try {
+    const productId = parseInt(req.params.productId);
+    const deletedProduct = await deleteProductById(productId);
+
+    if (!deletedProduct) {
+      response(404, `Can't find product`, `Product doesn't exist`, res);
+    }
+
+    response(200, deletedProduct, 'Success delete product by Id', res);
+  } catch (error) {
+    response(500, 'Invalid', 'Error when delete product', res);
+    console.log(error);
+  }
+};
+
+module.exports = {
+  getAllProducts,
+  addProduct,
+  getDetailProduct,
+  deleteProduct,
+};

@@ -39,11 +39,11 @@ const getAllUserWishlist = async (req, res) => {
 
 const addWishlist = async (req, res) => {
   try {
-    const { user_id, product_id } = req.body;
+    const { userId, productId } = req.body;
 
     const wishlistData = {
-      user_id,
-      product_id,
+      user_id: userId,
+      product_id: productId,
     };
     const wishlistItem = await createWishlist(wishlistData);
 
