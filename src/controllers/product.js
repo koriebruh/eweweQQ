@@ -42,7 +42,8 @@ const addProduct = async (req, res) => {
 
     // cek category, kalo ga ada dibikin dulu kalo ada lewat aja
     if (!category) {
-      await createCategory(productCategory);
+      // await createCategory(productCategory);
+      await createCategory({ category_name: productCategory });
     }
 
     // prepare data before push db
