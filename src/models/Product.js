@@ -28,6 +28,20 @@ const findProductByLabel = async (productLabel) => {
   return product;
 };
 
+const updateProductById = async (productId, updateData) => {
+  try {
+    const updatedProduct = await prisma.products.updateMany({
+      where: {
+        product_id: productId,
+      },
+      data: updateData,
+    });
+    return updatedProduct;
+  } catch (error) {
+    console.error('Error updating product:', error);
+    throw error;
+  }
+};
 const deleteProductById = async (productId) => {
   const deletedProduct = await prisma.products.delete({
     where: { product_id: productId },
@@ -41,5 +55,6 @@ module.exports = {
   createProduct,
   findProductById,
   findProductByLabel,
+  updateProductById,
   deleteProductById,
 };

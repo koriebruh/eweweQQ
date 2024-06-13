@@ -4,6 +4,7 @@ const {
   createProduct,
   findProductById,
   deleteProductById,
+  updateProductById,
 } = require('../models/Product');
 const { createCategory, findCategoriesByName } = require('../models/Category');
 
@@ -88,6 +89,50 @@ const getDetailProduct = async (req, res) => {
   }
 };
 
+const updateProduct = async (req, res) => {
+  try {
+    const productId = parseInt(req.params.productId);
+    const {
+      productName,
+      productLabel,
+      productImage,
+      description,
+      color,
+      stockQuantity,
+      price,
+      rating,
+      material,
+      fabric,
+      dimension,
+    } = req.body;
+
+    const updateData = {
+      product_name: productName,
+      product_label: productLabel,
+      product_image: productImage,
+      description: description,
+      color: color,
+      stock_quantity: stockQuantity,
+      price: price,
+      rating: rating,
+      material: material,
+      fabric: fabric,
+      dimension: dimension,
+    };
+
+    const updatedProduct = await updateProductById(productId, updateData);
+
+    if (!updatedProduct) {
+      return response(404, `Can't find product`, `Product doesn't exist`, res);
+    }
+
+    response(200, updateData, 'Success update product', res);
+  } catch (error) {
+    console.error('Error updating product:', error);
+    response(500, 'Invalid', 'Error when updating product', res);
+  }
+};
+
 const deleteProduct = async (req, res) => {
   try {
     const productId = parseInt(req.params.productId);
@@ -108,5 +153,6 @@ module.exports = {
   getAllProducts,
   addProduct,
   getDetailProduct,
+  updateProduct,
   deleteProduct,
 };
