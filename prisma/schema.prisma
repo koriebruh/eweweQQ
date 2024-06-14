@@ -31,7 +31,7 @@ model Categories {
 model Products {
   product_id      Int       @id @default(autoincrement())
   product_name    String    @unique
-  product_label   String    
+  product_label   String    @unique
   product_image   String[]  
   description     String
   color           String[]  @default([])

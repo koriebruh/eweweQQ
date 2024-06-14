@@ -945,6 +945,161 @@
       }
     },
 
+    "/product/predict": {
+      "post": {
+        "tags": ["Product"],
+        "summary": "Get predicted product",
+        "description": "Returns the details of a product by result from predicted ML model",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The image file to be uploaded and predicted"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success get detail product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "product_id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "product_name": {
+                          "type": "string",
+                          "example": "sofa 3 seater"
+                        },
+                        "product_label": {
+                          "type": "string",
+                          "example": "sofa01"
+                        },
+                        "product_image": {
+                          "type": "string",
+                          "example": "http://sajdsjfgjsad"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "sofa 3 seater yang empuk parah"
+                        },
+                        "color": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": ["Red", "Blue"]
+                        },
+                        "stock_quantity": {
+                          "type": "integer",
+                          "example": 10
+                        },
+                        "price": {
+                          "type": "integer",
+                          "example": 1200000
+                        },
+                        "rating": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 4.7
+                        },
+                        "material": {
+                          "type": "string",
+                          "example": "Kulit terbaik pokonya"
+                        },
+                        "fabric": {
+                          "type": "string",
+                          "example": "-"
+                        },
+                        "dimension": {
+                          "type": "string",
+                          "example": "2M x 3M"
+                        },
+                        "category_id": {
+                          "type": "integer",
+                          "example": 1
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success get product by Id"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 404
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "Can't find product"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Product doesn't exist"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": "Invalid"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Error when get detail product || model is not loaded yet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/product/{productId}": {
       "get": {
         "tags": ["Product"],
@@ -963,7 +1118,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success get detail product",
+            "description": "Success get predicted product",
             "content": {
               "application/json": {
                 "schema": {
@@ -1032,7 +1187,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Success get product by Id"
+                      "example": "Success get predicted product"
                     }
                   }
                 }

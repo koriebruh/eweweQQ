@@ -20,9 +20,9 @@ const findProductById = async (productId) => {
   return product;
 };
 
-const findProductByLabel = async (productLabel) => {
+const findProductByLabel = async (furnitureLabel) => {
   const product = await prisma.products.findUnique({
-    where: { product_label: productLabel },
+    where: { product_label: furnitureLabel },
   });
 
   return product;

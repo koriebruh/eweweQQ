@@ -1,58 +1,51 @@
-// const tf = require('@tensorflow/tfjs-node');
+const tf = require('@tensorflow/tfjs-node');
 
-// const predictedClassification = async (model, image) => {
-//   try {
-//     const tensor = tf.node
-//       .decodeJpeg(image)
-//       .resizeNearestNeighbor([640, 640])
-//       .expandDims()
-//       .toFloat()
-//       .div(tf.scalar(255))
-//       .transpose([0, 3, 1, 2]);
+const predictedClassification = async (model, image) => {
+  try {
+    const tensor = tf.node
+      .decodeJpeg(image)
+      .resizeNearestNeighbor([224, 224])
+      .expandDims()
+      .toFloat()
+      .div(tf.scalar(255));
 
-//     const prediction = model.predict(tensor);
-//     const scores = await prediction.data();
-//     console.log(scores);
+    const prediction = model.predict(tensor);
+    const scores = await prediction.data();
 
-//     // Find max score and its index
-//     let maxScore = -Infinity;
-//     let maxScoreIndex = -1;
+    // Find max score and its index
+    let maxScore = -Infinity;
+    let maxScoreIndex = 0;
 
-//     for (let i = 0; i < scores.length; i++) {
-//       if (scores[i] > maxScore) {
-//         maxScore = scores[i];
-//         maxScoreIndex = i;
-//       }
-//     }
-//     console.log(maxScore);
-//     console.log(maxScoreIndex);
+    for (let i = 0; i < scores.length; i++) {
+      if (scores[i] > maxScore) {
+        maxScore = scores[i];
+        maxScoreIndex = i;
+      }
+    }
 
-//     const labels = [
-//       'kursi01',
-//       'kursi02',
-//       'kursi03',
-//       'kursi04',
-//       'kursi05',
-//       'kursi06',
-//       'kursi07',
-//       'kursi08',
-//       'kursi09',
-//       'kursi10',
-//       'kursi11',
-//       'kursi12',
-//       'meja01',
-//       'sofa01',
-//     ];
+    const labels = [
+      'kursi01',
+      'kursi02',
+      'kursi03',
+      'kursi04',
+      'kursi05',
+      'kursi06',
+      'kursi07',
+      'kursi08',
+      'kursi09',
+      'kursi10',
+      'kursi11',
+      'kursi12',
+      'meja01',
+      'sofa01',
+    ];
 
-//     const furnitureType = labels[maxScoreIndex];
-//     const furnitureTypes = labels[3];
-//     console.log(furnitureType);
-//     console.log(furnitureTypes);
+    const furnitureLabel = labels[maxScoreIndex];
 
-//     return { furnitureType };
-//   } catch (error) {
-//     console.log('error when receive image', error);
-//   }
-// };
+    return { furnitureLabel };
+  } catch (error) {
+    console.log('error when receive image', error);
+  }
+};
 
-// module.exports = predictedClassification;
+module.exports = predictedClassification;
