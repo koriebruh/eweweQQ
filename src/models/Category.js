@@ -20,4 +20,17 @@ const createCategory = async (categoryData) => {
   return category;
 };
 
-module.exports = { findCategories, createCategory, findCategoriesByName };
+const findCategoryWithProducts = async (categoryId) => {
+  const category = await prisma.categories.findUnique({
+    where: { category_id: categoryId },
+    include: { products: true }, // Asumsikan relasi dengan produk bernama 'products'
+  });
+  return category;
+};
+
+module.exports = {
+  findCategories,
+  createCategory,
+  findCategoriesByName,
+  findCategoryWithProducts,
+};

@@ -1,5 +1,9 @@
 const response = require('../response');
-const { findCategories, createCategory } = require('../models/Category');
+const {
+  findCategories,
+  createCategory,
+  findCategoryWithProducts,
+} = require('../models/Category');
 
 const getAllCategory = async (req, res) => {
   try {
@@ -29,4 +33,21 @@ const addCategory = async (req, res) => {
   }
 };
 
-module.exports = { getAllCategory, addCategory };
+const getCategoryWithProducts = async (req, res) => {
+  try {
+    const categoryId = parseInt(req.params.categoryId);
+
+    const categoryProduct = await findCategoryWithProducts(categoryId);
+
+    if (!categoryProduct) {
+      return response(404, null, 'Category not found', res);
+    }
+
+    response(200, categoryProduct, 'Success get category with products', res);
+  } catch (error) {
+    console.log(error.message);
+    response(500, 'invalid', 'error', res);
+  }
+};
+
+module.exports = { getAllCategory, addCategory, getCategoryWithProducts };
