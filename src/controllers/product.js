@@ -5,6 +5,7 @@ const {
   findProductById,
   deleteProductById,
   updateProductById,
+  findProductsByName,
 } = require('../models/Product');
 const { createCategory, findCategoriesByName } = require('../models/Category');
 
@@ -82,7 +83,7 @@ const getDetailProduct = async (req, res) => {
       response(404, `Can't find product`, `Product doesn't exist`, res);
     }
 
-    response(200, product, 'Success get product by Id', res);
+    response(200, [product], 'Success get product by Id', res);
   } catch (error) {
     response(500, 'Invalid', 'Error when get detail product', res);
     console.log(error);
@@ -149,10 +150,26 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const searchProducts = async (req, res) => {
+  try {
+    const query = req.query.q;
+    if (!query) {
+      return response(400, 'Query parameter "q" is required', 'Bad request', res);
+    }
+
+    const products = await findProductsByName(query);
+    response(200, products, 'Success search products', res);
+  } catch (error) {
+    console.log(error);
+    response(500, 'invalid', 'error when search products', res);
+  }
+};
+
 module.exports = {
   getAllProducts,
   addProduct,
   getDetailProduct,
   updateProduct,
   deleteProduct,
+  searchProducts,
 };

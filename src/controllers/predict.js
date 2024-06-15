@@ -30,7 +30,7 @@ const postPredictionData = async (req, res) => {
       response(404, `Can't find product`, `Product doesn't exist`, res);
     }
 
-    response(200, product, 'Success get predicted product', res);
+    response(200, [product], 'Success get predicted product', res);
   } catch (error) {
     console.error('Error during prediction:', error);
     response(500, null, 'Error when prediction');
