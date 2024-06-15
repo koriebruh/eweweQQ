@@ -5,6 +5,7 @@ const {
   findProductById,
   deleteProductById,
   updateProductById,
+  findProductsByName,
 } = require('../models/Product');
 const { createCategory, findCategoriesByName } = require('../models/Category');
 
@@ -149,7 +150,20 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const searchProducts = async (req, res) => {
+  try {
+    const query = req.query.q;
+    if (!query) {
+      return response(400, 'Query parameter "q" is required', 'Bad request', res);
+    }
 
+    const products = await findProductsByName(query);
+    response(200, products, 'Success search products', res);
+  } catch (error) {
+    console.log(error);
+    response(500, 'invalid', 'error when search products', res);
+  }
+};
 
 module.exports = {
   getAllProducts,
@@ -157,4 +171,5 @@ module.exports = {
   getDetailProduct,
   updateProduct,
   deleteProduct,
+  searchProducts,
 };

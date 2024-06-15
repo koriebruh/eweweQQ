@@ -19,10 +19,11 @@ const upload = multer({
 router.get('/', getAllProducts);
 router.post('/', addProduct);
 router.post('/predict', upload.single('image'), postPredictionData);
+router.get('/search', searchProducts);
 router.get('/:productId', getDetailProduct);
 router.patch('/:productId', updateProduct);
 router.delete('/:productId', deleteProduct);
-// router.get('/search', searchProducts);
+
 
 
 module.exports = router;

@@ -13,7 +13,7 @@ const createProduct = async (productData) => {
 };
 
 const findProductById = async (productId) => {
-  const product = await prisma.products.findUnique({
+  const product = await prisma.Products.findUnique({
     where: { product_id: productId },
   });
 
@@ -50,6 +50,18 @@ const deleteProductById = async (productId) => {
   return deletedProduct;
 };
 
+const findProductsByName = async (productName) => {
+  const products = await prisma.Products.findMany({
+    where: {
+      product_name: {
+        contains: productName,
+        mode: 'insensitive',
+      },
+    },
+  });
+  return products;
+};
+
 module.exports = {
   findAllProduct,
   createProduct,
@@ -57,4 +69,5 @@ module.exports = {
   findProductByLabel,
   updateProductById,
   deleteProductById,
+  findProductsByName,
 };
