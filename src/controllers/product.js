@@ -82,7 +82,7 @@ const getDetailProduct = async (req, res) => {
       response(404, `Can't find product`, `Product doesn't exist`, res);
     }
 
-    response(200, product, 'Success get product by Id', res);
+    response(200, [product], 'Success get product by Id', res);
   } catch (error) {
     response(500, 'Invalid', 'Error when get detail product', res);
     console.log(error);
@@ -148,6 +148,8 @@ const deleteProduct = async (req, res) => {
     console.log(error);
   }
 };
+
+
 
 module.exports = {
   getAllProducts,

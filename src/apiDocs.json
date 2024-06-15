@@ -980,7 +980,7 @@
                       "example": 200
                     },
                     "data": {
-                      "type": "object",
+                      "type": "array",
                       "properties": {
                         "product_id": {
                           "type": "integer",
@@ -1129,7 +1129,7 @@
                       "example": 200
                     },
                     "data": {
-                      "type": "object",
+                      "type": "array",
                       "properties": {
                         "product_id": {
                           "type": "integer",

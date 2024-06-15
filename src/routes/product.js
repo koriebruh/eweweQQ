@@ -5,6 +5,7 @@ const {
   getDetailProduct,
   deleteProduct,
   updateProduct,
+  searchProducts,
 } = require('../controllers/product');
 const { postPredictionData } = require('../controllers/predict');
 const multer = require('multer');
@@ -21,5 +22,7 @@ router.post('/predict', upload.single('image'), postPredictionData);
 router.get('/:productId', getDetailProduct);
 router.patch('/:productId', updateProduct);
 router.delete('/:productId', deleteProduct);
+// router.get('/search', searchProducts);
+
 
 module.exports = router;
