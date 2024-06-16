@@ -1221,6 +1221,149 @@
         }
       }
     },
+    "/products/search": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "Search products by name",
+        "description": "Retrieve products that match the search query.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Query parameter to search products by name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success search products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "product_id": {
+                            "type": "integer",
+                            "example": 15
+                          },
+                          "product_name": {
+                            "type": "string",
+                            "example": "Geeny Sofa"
+                          },
+                          "product_label": {
+                            "type": "string",
+                            "example": ""
+                          },
+                          "product_image": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "https://storage.googleapis.com/furniscan-asset/sofa02.webp"
+                            }
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "The Sofa is a luxurious and elegant piece of furniture that adds a touch of sophistication to any living space. Upholstered in a soft cream fabric, this sofa exudes comfort and style. Its timeless design features sleek lines and gently curved arms, creating a classic look that complements a variety of decor styles."
+                          },
+                          "color": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": "green, blue"
+                            }
+                          },
+                          "stock_quantity": {
+                            "type": "integer",
+                            "example": 14
+                          },
+                          "price": {
+                            "type": "integer",
+                            "example": 3600000
+                          },
+                          "rating": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 4.9
+                          },
+                          "material": {
+                            "type": "string",
+                            "example": "Polyurethane foam"
+                          },
+                          "fabric": {
+                            "type": "string",
+                            "example": "polyester"
+                          },
+                          "dimension": {
+                            "type": "string",
+                            "example": "145cm X 70,5cm X 79cm"
+                          },
+                          "category_id": {
+                            "type": "integer",
+                            "example": 3
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Success search products"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+          "400": {
+            "description": "Query parameter \"q\" is required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Query parameter \"q\" is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
     "/product/{productId}": {
       "get": {
         "tags": ["Product"],
