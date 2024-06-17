@@ -167,18 +167,6 @@ const searchProducts = async (req, res) => {
     res.status(500).json({ message: 'Error when search products' });
     console.error(error);
   }
-  // try {
-  //   const query = req.query.q;
-  //   if (!query) {
-  //     return response(400, 'Query parameter "q" is required', 'Bad request', res);
-  //   }
-
-  //   const products = await findProductsByName(query);
-  //   response(200, products, 'Success search products', res);
-  // } catch (error) {
-  //   console.log(error);
-  //   response(500, 'invalid', 'error when search products', res);
-  // }
 };
 
 module.exports = {
