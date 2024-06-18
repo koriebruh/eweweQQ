@@ -23,6 +23,9 @@ const predictedClassification = async (model, image) => {
       }
     }
 
+    console.log(maxScoreIndex);
+    console.log(maxScore);
+
     const labels = [
       'kursi01',
       'kursi02',
@@ -42,7 +45,7 @@ const predictedClassification = async (model, image) => {
 
     const furnitureLabel = labels[maxScoreIndex];
 
-    return { furnitureLabel };
+    return { furnitureLabel, maxScore };
   } catch (error) {
     console.log('error when receive image', error);
   }

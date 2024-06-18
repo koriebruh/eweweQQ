@@ -19,10 +19,17 @@ const postPredictionData = async (req, res) => {
 
   try {
     if (!model) {
-      return res.status(500).send('Model is not loaded yet');
+      return response(500, null, 'Model is not loaded yet', res);
     }
 
-    const { furnitureLabel } = await predictedClassification(model, image);
+    const { furnitureLabel, maxScore } = await predictedClassification(
+      model,
+      image
+    );
+
+    if (maxScore <= 0.9) {
+      return response(404, null, 'Sorry, product not found', res);
+    }
 
     const product = await findProductByLabel(furnitureLabel);
 
@@ -33,7 +40,7 @@ const postPredictionData = async (req, res) => {
     response(200, [product], 'Success get predicted product', res);
   } catch (error) {
     console.error('Error during prediction:', error);
-    response(500, null, 'Error when prediction');
+    response(500, null, 'Error when prediction', res);
   }
 };
 
