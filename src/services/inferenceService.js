@@ -23,9 +23,6 @@ const predictedClassification = async (model, image) => {
       }
     }
 
-    console.log(maxScoreIndex);
-    console.log(maxScore);
-
     const labels = [
       'kursi01',
       'kursi02',
