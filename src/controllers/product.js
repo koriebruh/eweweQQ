@@ -154,14 +154,18 @@ const searchProducts = async (req, res) => {
   try {
     const query = req.query.q;
     if (!query) {
-      return response(400, 'Query parameter "q" is required', 'Bad request', res);
+      return res.status(400).json({ message: 'Query parameter "q" is required' });
     }
 
     const products = await findProductsByName(query);
-    response(200, products, 'Success search products', res);
+    if (products.length === 0) {
+      return res.status(404).json({ message: `Product with name ${query} not found` });
+    }
+
+    return res.status(200).json({ data: products, message: 'Success search products' });
   } catch (error) {
-    console.log(error);
-    response(500, 'invalid', 'error when search products', res);
+    res.status(500).json({ message: 'Error when search products' });
+    console.error(error);
   }
 };
 
