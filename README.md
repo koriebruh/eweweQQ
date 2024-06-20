@@ -10,14 +10,7 @@ _The cloud technology used in FurniScan_
 <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Google_Cloud_logo.svg" width="250"/>
 </p>
 
-Google Cloud Platform (GCP) is a Google-provided set of cloud computing services. It is a platform that offers computing infrastructure and services for running applications, storing and managing data, and developing software solutions.
-
-Google cloud product we use in this project:
-
-- **Cloud SQL**: Database for this project.
-- **Cloud Storage**: For stored Machine Learning model and all assets.
-- **Cloud Run**: For deployed Backend services.
-- **Artifact Registry**: For store docker images.
+Google Cloud Platform (GCP) is a suite of cloud computing services that runs on the same infrastructure that Google uses internally for its end-user products, such as Google Search and YouTube. It provides a range of modular cloud services including computing, data storage, data analytics, and machine learning.
 
 ## Technology We Used
 
@@ -92,4 +85,4 @@ Location      : asia-southeast2
 
 ```
 
-Docs: [cloud-run-docs](https://cloud.google.com/artifact-registry/docs)
+Docs: [artifact-registry-docs](https://cloud.google.com/artifact-registry/docs)
