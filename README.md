@@ -1,13 +1,5 @@
 # FurniScan - Cloud Computing
 
-## Base URL
-
-API Documentation FurniScan
-
-```sh
-https://furniscan-api-biefnc5uba-et.a.run.app/api-docs
-```
-
 ## Cloud Technology
 
 _The cloud technology used in FurniScan_
@@ -20,59 +12,48 @@ _The cloud technology used in FurniScan_
 
 Google Cloud Platform (GCP) is a Google-provided set of cloud computing services. It is a platform that offers computing infrastructure and services for running applications, storing and managing data, and developing software solutions.
 
-The cloud technology that used in this project:
+Google cloud product we use in this project:
 
-- **Google Cloud Platform**: Suite of cloud computing services provided by Google.
-- **Firestore**: for the application database.
-- **App Engine**: For deploying Backend API.
-- **Cloud Storage**: For storing the assets.
-- **Cloud Run**: For deploying machine learning model.
+- **Cloud SQL**: Database for this project.
+- **Cloud Storage**: For stored Machine Learning model and all assets.
+- **Cloud Run**: For deployed Backend services.
+- **Artifact Registry**: For store docker images.
 
-## Technology Used
+## Technology We Used
 
-There are four applications of Google Cloud technologies in the **Fruitarians** application: Firestore, App Engine, Cloud Storage, and Cloud Run. On the cloud side, these three services are utilized to handle all requests and provide data services.
+### Nodejs Framework (Expressjs)
 
-### Firestore
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" width="120"/>
 
-<img src="https://cdn.cdnlogo.com/logos/f/45/firestore.svg" width="120" height="100"/>
+### Tensorflow JS
 
-This firestore service **`has been deployed`** on development environment.
+<img src="https://www.tensorflow.org/static/site-assets/images/project-logos/tensorflow-js-logo-social.png" width="120"/>
 
-Service details:
+## Google Cloud Product We Used
 
-```YAML
-Database Type   : NoSQL
-Location        : asia-southeast2
-Storage         : 10 GB
+### Cloud SQL
+
+<img src="https://dbdb.io/media/logos/Cloud_SQL.png" width="120" height="100"/>
+
+Configuration Details:
+
 ```
-
-Docs: [firestore-docs](https://cloud.google.com/firestore/docs)
-
-### App Engine
-
-<img src="https://symbols.getvecta.com/stencil_4/8_google-app-engine.c22bd3c7a9.svg" width="100" height="50"/>
-
-This app service **`has been deployed`**. on development environment.
-
-Service details:
-
-```YAML
+Database Engine   : PostgreSQL 15
 Location          : asia-southeast2
-Instance Type     : F1
-Persintence disk  : 10
-Runtime           : nodejs18
+vCpus             : 1
+Memory            : 3.75 GB
+Storage           : 10 GB
 ```
 
-Docs:
-[app-engine-docs](https://cloud.google.com/appengine/docs/standard/nodejs/runtime)
+Docs: [CloudSQL-docs](https://cloud.google.com/sql/docs)
 
 ### Cloud Storage
 
 <img src="https://symbols.getvecta.com/stencil_4/47_google-cloud-storage.fee263d33a.svg" width="100" height="50"/>
 
-This storage service **`has been deployed`**. on development environment.
+Configuration Details: 
 
-```YAML
+```
 Location Type   : Region
 Location        : asia-southeast2
 Storage Class   : Standard
@@ -82,15 +63,33 @@ Docs: [cloud-storage-docs](https://cloud.google.com/storage/docs)
 
 ### Cloud Run
 
-<img src="https://www.vectorlogo.zone/logos/google_cloud_run/google_cloud_run-ar21.svg" width="150" height="150"/>
+<img src="https://static-00.iconduck.com/assets.00/google-cloud-run-icon-512x460-knkc4eyx.png" width="150" height="150"/>
 
-This cloud run service **`has been deployed`**. on development environment.
+Configuration Details:
 
-```YAML
+```
 Location        : asia-southeast2
-CPU             : 4
-Memory          : 8
+CPU             : 2
+Memory          : 4
+Min Instance    : 2
+PORT            : 5000
 
 ```
 
 Docs: [cloud-run-docs](https://cloud.google.com/run/docs)
+
+### Artifact Registry
+
+<img src="https://techconative.com/images/blog/gcp-artifact-registry/artifact-registry-logo.svg" width="150" height="150"/>
+
+Configuration Details:
+
+```
+Format        : Docker
+Mode          : Standard
+Location      : asia-southeast2
+
+
+```
+
+Docs: [cloud-run-docs](https://cloud.google.com/artifact-registry/docs)
