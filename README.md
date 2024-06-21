@@ -13,7 +13,7 @@ _The cloud technology used in FurniScan_
 Google Cloud Platform (GCP) is a suite of cloud computing services that runs on the same infrastructure that Google uses internally for its end-user products, such as Google Search and YouTube. It provides a range of modular cloud services including computing, data storage, data analytics, and machine learning.
 
 ## Furniscan API Documentation
-<p>We use swagger UI to document the API. Below is our application API documentation: </p>
+We use swagger UI to document the API. Below is our application API documentation:
 ```bash
   https://furniscan-api-biefnc5uba-et.a.run.app/api-docs/
 ```
@@ -23,20 +23,11 @@ Google Cloud Platform (GCP) is a suite of cloud computing services that runs on 
 ### Nodejs Framework (Expressjs)
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png" width="120"/>
-<p>Here to install express in terminal: </p>
-```bash
-  npm install express
-```
-<p>The installation version can be according to your needs</p>
+
 
 ### Tensorflow JS
 
 <img src="https://www.tensorflow.org/static/site-assets/images/project-logos/tensorflow-js-logo-social.png" width="120"/>
-<p>Here to install Tensorflow JS in terminal using WSL: </p>
-```bash
-  npm install @tensorflow/tfjs
-```
-<p>The installation version can be according to your needs</p>
 
 ## Google Cloud Product We Used
 
@@ -104,9 +95,22 @@ Location      : asia-southeast2
 Docs: [artifact-registry-docs](https://cloud.google.com/artifact-registry/docs)
 
 
-### Others
-<p>we use prisma to simplify the interaction between the application and the database. Here is how to install it: </p>
+## Others
+We use prisma to simplify the interaction between the application and the database. Here is how to install it:
 ```bash
   npm install @prisma/client
+```
+```bash
   npm install prisma --save-dev
 ```
+
+The installation version can be according to your needs. Here to install express in terminal: 
+```bash
+  npm install express
+```
+
+Here to install Tensorflow JS in terminal using WSL: 
+```bash
+  npm install @tensorflow/tfjs
+```
+
