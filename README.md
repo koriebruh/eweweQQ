@@ -12,6 +12,12 @@ _The cloud technology used in FurniScan_
 
 Google Cloud Platform (GCP) is a suite of cloud computing services that runs on the same infrastructure that Google uses internally for its end-user products, such as Google Search and YouTube. It provides a range of modular cloud services including computing, data storage, data analytics, and machine learning.
 
+## Furniscan API Documentation
+
+```bash
+  https://furniscan-api-biefnc5uba-et.a.run.app/api-docs/
+```
+
 ## Technology We Used
 
 ### Nodejs Framework (Expressjs)
