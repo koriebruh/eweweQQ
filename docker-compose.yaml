@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: furniscan-db
+    restart: always
+    environment:
+      POSTGRES_DB: furniscan_data
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: furniscan_capstone
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  furniscan-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: furniscan-app
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./model_tfjs:/app/model_tfjs
+    environment:
+      - PORT=5000
+      - DB_HOST=postgres
+      - DB_USER=postgres
+      - DB_NAME=furniscan_data
+      - DB_PASSWORD=furniscan_capstone
+      - DATABASE_URL=postgresql://postgres:furniscan_capstone@postgres:5432/furniscan_data
+      - JWT_SECRET=bingungisiapa
+      - MODEL_URL=file:///app/model_tfjs/model.json
+
+
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
